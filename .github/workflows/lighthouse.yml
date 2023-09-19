@@ -13,6 +13,11 @@ jobs:
         run: |
           npm install
           npm run build
+
+      # Новий крок для запуску Puppeteer скрипта
+      - name: Run Puppeteer login script
+        run: DEPLOYMENT_URL=${{ github.event.deployment_status.target_url }} npm run login-script
+
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.12.x

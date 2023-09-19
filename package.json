@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lhci": "lhci autorun"
-
+    "lhci": "lhci autorun",
+    "login-script": "node loginScript.js"
   },
   "dependencies": {
     "@types/node": "20.6.2",
@@ -26,6 +26,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@lhci/cli": "^0.12.0"
+    "@lhci/cli": "^0.12.0",
+    "puppeteer": "^21.3.1"
   }
 }
