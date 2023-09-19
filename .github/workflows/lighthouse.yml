@@ -27,3 +27,6 @@ jobs:
           lhci autorun --collect.url=$DEPLOYMENT_URL
         env:
           DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
+          TEST_LOGIN_PATH: /api/auth/signin
+          TEST_USER: django
+          TEST_PASSWORD: password
