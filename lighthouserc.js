@@ -1,10 +1,7 @@
 module.exports = {
   ci: {
     collect: {
-      url: [
-        // `https://${process.env.VERCEL_URL}`,
-        'https://next-auth-app-eta.vercel.app'
-      ],
+      url: [process.env.DEPLOYMENT_URL],
       numberOfRuns: 3,
     },
     upload: {
