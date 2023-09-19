@@ -9,6 +9,7 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
   await page.goto(`${process.env.DEPLOYMENT_URL}`);
 
+  await page.waitForSelector('#input-username-for-credentials-provider');
   await page.type('#input-username-for-credentials-provider', process.env.TEST_USER);
   await page.type('#input-password-for-credentials-provider', process.env.TEST_PASSWORD);
   await page.click('button[type="submit"]');
