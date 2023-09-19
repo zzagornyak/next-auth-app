@@ -1,8 +1,12 @@
 name: Lighthouse CI
-on: [push, pull_request]
+
+on: 
+  deployment_status:
+
 jobs:
   lhci:
     runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
@@ -16,4 +20,6 @@ jobs:
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.12.x
-          lhci autorun
+          lhci autorun --collect.url=$DEPLOYMENT_URL
+        env:
+          DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
