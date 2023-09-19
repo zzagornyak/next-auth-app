@@ -20,6 +20,11 @@ jobs:
 
       - name: Run Puppeteer login script
         run: DEPLOYMENT_URL=${{ github.event.deployment_status.target_url }} npm run login-script
+        env:
+          DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
+          TEST_LOGIN_PATH: /api/auth/signin
+          TEST_USER: django
+          TEST_PASSWORD: password
 
       - name: Run Lighthouse CI
         run: |
@@ -27,6 +32,3 @@ jobs:
           lhci autorun --collect.url=$DEPLOYMENT_URL
         env:
           DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
-          TEST_LOGIN_PATH: /api/auth/signin
-          TEST_USER: django
-          TEST_PASSWORD: password
