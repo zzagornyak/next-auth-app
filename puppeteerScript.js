@@ -1,3 +1,8 @@
+/**
+ * @param {puppeteer.Browser} browser
+ * @param {{url: string, options: LHCI.CollectCommand.Options}} context
+ */
+
 let counter = 1;
 
 async function login(page) {
