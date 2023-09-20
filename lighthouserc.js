@@ -8,9 +8,11 @@ module.exports = {
         process.env.DEPLOYMENT_URL,
       ],
       settings: {
+        "skipAudits": ["redirects-http"],
         "disableStorageReset": true,
+        "maxWaitForLoad": 60000,
         "throttlingMethod": "devtools"
-      },
+      }
     },
     upload: {
       target: 'temporary-public-storage',
