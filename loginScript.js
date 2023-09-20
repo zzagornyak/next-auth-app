@@ -1,12 +1,17 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
+  console.log(process.env.DEPLOYMENT_URL);
+  console.log(process.env.TEST_LOGIN_PATH);
+  console.log(process.env.TEST_USER);
+  console.log(process.env.TEST_PASSWORD);
+
   console.log("Launching browser...");
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   
   console.log("Navigating to login page...");
-  await page.goto(`${process.env.DEPLOYMENT_URL}`);
+  await page.goto(`${process.env.DEPLOYMENT_URL}${process.env.TEST_LOGIN_PATH}`);
   
   console.log("Waiting for username field...");
   await page.waitForSelector('#input-username-for-credentials-provider');
