@@ -1,8 +1,3 @@
-/**
- * @param {puppeteer.Browser} browser
- * @param {{url: string, options: LHCI.CollectCommand.Options}} context
- */
-
 let counter = 1;
 
 async function login(page) {
@@ -15,6 +10,7 @@ async function login(page) {
   await page.waitForSelector('#input-username-for-credentials-provider');
   
   await page.type('#input-username-for-credentials-provider', 'django');
+  await page.type('#input-password-for-credentials-provider', 'password');
 
   console.log("Clicking submit button...");
   await page.click('button[type="submit"]');
@@ -40,9 +36,9 @@ module.exports = async (browser, context) => {
   if(counter === 1) {
     await login(page);
   } 
-  // else {
-  //   await page.goto(context.url);
-  // }
+  else {
+    await page.goto(context.url);
+  }
 
   await page.close();
   counter++;
