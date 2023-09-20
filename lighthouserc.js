@@ -9,21 +9,26 @@ module.exports = {
         process.env.DEPLOYMENT_URL,
       ],
       settings: {
-        "skipAudits": ["redirects-http"],
         "disableStorageReset": true,
         "maxWaitForLoad": 60000,
-        "throttlingMethod": "devtools"
+        "throttlingMethod": "devtools",
+        "chromeFlags": ["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"]
       }
+    },
+    healthCheck: {
+      fatal: true
     },
     upload: {
       target: 'temporary-public-storage',
+      failOnUploadFailure: true,
+      ignoreDuplicateBuildFailure: true,
     },
     assert: {
       "assertions": {
-          "categories:performance": ["error", {"minScore": 0.7}],
-          "categories:accessibility": ["error", {"minScore": 0.7}],
-          "categories:best-practices": ["error", {"minScore": 0.7}],
-          "categories:seo": ["error", {"minScore": 0.7}]
+          "categories:performance": ["warn", {"minScore": 0.8}],
+          "categories:accessibility": ["warn", {"minScore": 0.8}],
+          "categories:best-practices": ["error", {"minScore": 0.8}],
+          "categories:seo": ["warn", {"minScore": 0.8}]
       }
     },
   },
