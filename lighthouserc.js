@@ -1,7 +1,7 @@
 module.exports = {
   ci: {
     collect: {
-      puppeteerScript: './login-script.js',
+      // puppeteerScript: './login-script.js',
       numberOfRuns: 1,
       disableStorageReset: true,
       url: [
