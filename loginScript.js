@@ -27,9 +27,15 @@ const puppeteer = require('puppeteer');
   console.log("Password typed:", password);
   
   console.log("Clicking submit button...");
-  await page.click('button[type="submit"]');
+await page.click('button[type="submit"]');
+await page.waitForNavigation();
 
-  
-  console.log("Closing browser...");
-  await browser.close();
+console.log("Getting cookies...");
+const cookies = await page.cookies();
+process.env.COOKIES = cookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+
+console.log("Cookies obtained:", process.env.COOKIES);
+
+console.log("Closing browser...");
+await browser.close();
 })();

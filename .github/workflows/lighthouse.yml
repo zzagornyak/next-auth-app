@@ -32,3 +32,4 @@ jobs:
           lhci autorun --collect.url=$DEPLOYMENT_URL
         env:
           DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
+          COOKIES: ${{ env.COOKIES }}

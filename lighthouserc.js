@@ -2,10 +2,12 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        `https://${process.env.DEPLOYMENT_URL}`,
-        // 'https://next-auth-app-eta.vercel.app'
+        process.env.DEPLOYMENT_URL,
       ],
-      numberOfRuns: 3,
+      numberOfRuns: 1,
+      settings: {
+        extraHeaders: JSON.stringify({ "Cookie": process.env.COOKIES }),
+      },
     },
     upload: {
       target: 'temporary-public-storage',
