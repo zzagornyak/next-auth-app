@@ -2,7 +2,6 @@ module.exports = {
   ci: {
     collect: {
       puppeteerScript: './login-script.js',
-      puppeteerLaunchOptions: {args: ['--allow-no-sandbox-job', '--allow-sandbox-debugging', '--no-sandbox', '--disable-gpu', '--disable-gpu-sandbox', '--display']},
       numberOfRuns: 1,
       disableStorageReset: true,
       url: [
