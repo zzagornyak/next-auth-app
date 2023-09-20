@@ -13,11 +13,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
       - name: Install dependencies and build
         run: |
           npm install
           npm run build
-
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.12.x

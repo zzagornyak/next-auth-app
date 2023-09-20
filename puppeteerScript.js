@@ -27,7 +27,7 @@ async function login(page) {
   });
 }
 
-async function setup(browser, context) {
+module.exports = async (browser, context) => {
   console.log(process.env.DEPLOYMENT_URL);
   console.log(process.env.TEST_LOGIN_PATH);
   console.log(process.env.TEST_USER);
@@ -46,5 +46,3 @@ async function setup(browser, context) {
   await page.close();
   counter++;
 };
-
-module.exports = setup;
