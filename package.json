@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lhci": "lhci autorun",
-    "login-script": "node loginScript.js"
+    "login-script": "node puppeteerScript.js"
   },
   "dependencies": {
     "@types/node": "20.6.2",

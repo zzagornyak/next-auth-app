@@ -15,7 +15,7 @@ async function login(page) {
   await page.waitForSelector('#input-username-for-credentials-provider');
   
   await page.type('#input-username-for-credentials-provider', 'django');
-  
+
   console.log("Clicking submit button...");
   await page.click('button[type="submit"]');
   await page.waitForNavigation();
@@ -28,10 +28,10 @@ async function login(page) {
 }
 
 module.exports = async (browser, context) => {
-  console.log(process.env.DEPLOYMENT_URL);
-  console.log(process.env.TEST_LOGIN_PATH);
-  console.log(process.env.TEST_USER);
-  console.log(process.env.TEST_PASSWORD);
+  // console.log(process.env.DEPLOYMENT_URL);
+  // console.log(process.env.TEST_LOGIN_PATH);
+  // console.log(process.env.TEST_USER);
+  // console.log(process.env.TEST_PASSWORD);
 
   console.log("Launching browser...");
   const page = await browser.newPage();
@@ -39,9 +39,10 @@ module.exports = async (browser, context) => {
   
   if(counter === 1) {
     await login(page);
-  } else {
-    await page.goto(context.url);
-  }
+  } 
+  // else {
+  //   await page.goto(context.url);
+  // }
 
   await page.close();
   counter++;

@@ -22,7 +22,7 @@ jobs:
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.12.x
-          lhci autorun
+          lhci autorun --settings.disableStorageReset
         env:
           DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
           TEST_LOGIN_PATH: /api/auth/signin
