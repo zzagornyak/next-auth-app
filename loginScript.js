@@ -1,15 +1,8 @@
-const puppeteer = require('puppeteer');
+let counter = 1;
 
-(async () => {
-  console.log(process.env.DEPLOYMENT_URL);
-  console.log(process.env.TEST_LOGIN_PATH);
-  console.log(process.env.TEST_USER);
-  console.log(process.env.TEST_PASSWORD);
+async function login(page) {
+  await page.waitForTimeout(2000)
 
-  console.log("Launching browser...");
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  
   console.log("Navigating to login page...");
   await page.goto(`${process.env.DEPLOYMENT_URL}${process.env.TEST_LOGIN_PATH}`);
   
@@ -17,14 +10,6 @@ const puppeteer = require('puppeteer');
   await page.waitForSelector('#input-username-for-credentials-provider');
   
   await page.type('#input-username-for-credentials-provider', 'django');
-  
-  const username = await page.$eval('#input-username-for-credentials-provider', el => el.value);
-  console.log("Username typed:", username);
-
-  await page.type('#input-password-for-credentials-provider', 'password');
-
-  const password = await page.$eval('#input-password-for-credentials-provider', el => el.value);
-  console.log("Password typed:", password);
   
   console.log("Clicking submit button...");
   await page.click('button[type="submit"]');
@@ -35,6 +20,26 @@ const puppeteer = require('puppeteer');
   cookies.forEach(cookie => {
     console.log(cookie.name, cookie.value);
   });
+}
 
+async function setup(browser, context) {
+  console.log(process.env.DEPLOYMENT_URL);
+  console.log(process.env.TEST_LOGIN_PATH);
+  console.log(process.env.TEST_USER);
+  console.log(process.env.TEST_PASSWORD);
 
-})();
+  console.log("Launching browser...");
+  const page = await browser.newPage();
+  await page.setCacheEnabled(true);
+  
+  if(counter === 1) {
+    await login(page);
+  } else {
+    await page.goto(context.url);
+  }
+
+  await page.close();
+  counter++;
+};
+
+module.exports = setup;

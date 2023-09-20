@@ -18,18 +18,12 @@ jobs:
           npm install
           npm run build
 
-      - name: Run Puppeteer login script
-        run: DEPLOYMENT_URL=${{ github.event.deployment_status.target_url }} npm run login-script
-        env:
-          DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
-          TEST_LOGIN_PATH: /api/auth/signin
-          TEST_USER: django
-          TEST_PASSWORD: password
-
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.12.x
           lhci autorun --collect.url=$DEPLOYMENT_URL --collect.settings.extraHeaders="{\"Cookie\": \"$COOKIES\"}"
         env:
           DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
-          COOKIES: ${{ env.COOKIES }}
+          TEST_LOGIN_PATH: /api/auth/signin
+          TEST_USER: django
+          TEST_PASSWORD: password
