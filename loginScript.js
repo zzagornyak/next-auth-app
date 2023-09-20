@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
   
   console.log("Navigating to login page...");
-  await page.goto('http://localhost:3000/api/auth/signin');
+  await page.goto(`${process.env.DEPLOYMENT_URL}`);
   
   console.log("Waiting for username field...");
   await page.waitForSelector('#input-username-for-credentials-provider');
@@ -23,14 +23,6 @@ const puppeteer = require('puppeteer');
   
   console.log("Clicking submit button...");
   await page.click('button[type="submit"]');
-
-  console.log("Navigating to middleware page...");
-  await page.goto('http://localhost:3000/middleware');
-  // find h1 tag log its text
-  const h1Text = await page.$eval('h1', el => el.textContent);
-  console.log("H1 text:", h1Text);
-
-
 
   
   console.log("Closing browser...");
